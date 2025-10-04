@@ -1,0 +1,87 @@
+﻿@model IEnumerable<NCVITAMINS.Models.bd.COMPANIA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDENTIFICACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Usuario1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion1.Direccion1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario1.Usuario1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono1.Telefono1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDENTIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Usuario1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion1.Direccion1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario1.Usuario1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono1.Telefono1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
