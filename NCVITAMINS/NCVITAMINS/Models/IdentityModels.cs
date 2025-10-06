@@ -31,5 +31,7 @@ namespace NCVITAMINS.Models
         }
 
         public System.Data.Entity.DbSet<NCVITAMINS.Models.bd.Existencia> Existencias { get; set; }
+
+        public System.Data.Entity.DbSet<NCVITAMINS.Models.bd.Ciudad> Ciudads { get; set; }
     }
 }
