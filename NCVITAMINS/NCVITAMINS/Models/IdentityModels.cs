@@ -35,5 +35,7 @@ namespace NCVITAMINS.Models
         public System.Data.Entity.DbSet<NCVITAMINS.Models.bd.Ciudad> Ciudads { get; set; }
 
         public System.Data.Entity.DbSet<NCVITAMINS.Models.bd.Barrio> Barrios { get; set; }
+
+        public System.Data.Entity.DbSet<NCVITAMINS.Models.bd.RequizaCompra> RequizaCompras { get; set; }
     }
 }

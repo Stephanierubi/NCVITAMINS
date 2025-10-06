@@ -269,6 +269,7 @@
     <Compile Include="Models\bd\RequizaCompraDetalle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\bd\RequizaComprasController.cs" />
     <Compile Include="Models\bd\SUCURSAL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -441,6 +442,11 @@
     <Content Include="Views\Barrios\Details.cshtml" />
     <Content Include="Views\Barrios\Edit.cshtml" />
     <Content Include="Views\Barrios\Index.cshtml" />
+    <Content Include="Views\RequizaCompras\Create.cshtml" />
+    <Content Include="Views\RequizaCompras\Delete.cshtml" />
+    <Content Include="Views\RequizaCompras\Details.cshtml" />
+    <Content Include="Views\RequizaCompras\Edit.cshtml" />
+    <Content Include="Views\RequizaCompras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
