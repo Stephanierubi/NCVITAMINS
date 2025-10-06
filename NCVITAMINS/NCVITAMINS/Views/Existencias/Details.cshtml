@@ -1,0 +1,58 @@
+﻿@model NCVITAMINS.Models.bd.Existencia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Existencia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDAlmacen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDAlmacen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatetedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatetedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

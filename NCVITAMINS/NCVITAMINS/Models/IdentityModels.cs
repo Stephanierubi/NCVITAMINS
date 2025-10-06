@@ -29,5 +29,7 @@ namespace NCVITAMINS.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<NCVITAMINS.Models.bd.Existencia> Existencias { get; set; }
     }
 }
