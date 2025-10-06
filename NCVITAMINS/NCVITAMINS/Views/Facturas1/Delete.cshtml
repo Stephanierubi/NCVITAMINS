@@ -1,0 +1,128 @@
+﻿@model NCVITAMINS.Models.bd.Factura
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Factura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroFactura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroFactura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pagada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pagada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Revertida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Revertida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cancelada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cancelada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tienda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tienda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FormaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormaPago)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
