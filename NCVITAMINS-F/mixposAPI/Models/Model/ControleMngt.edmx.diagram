@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="016831b494d747728571b5ace48a1bf9" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="controleModel.Catalog" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.CatalogDetail" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Cliente" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Existencia" Width="1.5" PointX="7.5" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Factura" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.FacturaDetalle" Width="1.5" PointX="9.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Inventario" Width="1.5" PointX="7.5" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.InventarioProducto" Width="1.5" PointX="12.75" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.MovimientoExitencia" Width="1.5" PointX="12.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Producto" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Proveedor" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.RecepcionPedido" Width="1.5" PointX="7.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.RequizaCompra" Width="1.5" PointX="7.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.RequizaCompraDetalle" Width="1.5" PointX="9.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="controleModel.Usuario" Width="1.5" PointX="5.25" PointY="37.375" IsExpanded="true" />
+        <AssociationConnector Association="controleModel.FK__CatalogDe__Catal__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Cliente__Tienda__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Existenci__IDAlm__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Almac__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Movimient__IDTip__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Producto__Almace__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Producto__Labora__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Producto__TipoPr__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Producto__TipoVe__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__Almac__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__Labor__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__Marca__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Usuarios__Store__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Usuarios__Tipo__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Factura__ClientI__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Existenci__Creat__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Existenci__IDPro__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Movimient__IDExi__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Movimient__IDExi__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__FacturaDe__Factu__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__FacturaDe__Modif__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__FacturaDe__Produ__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Creat__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Inven__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Modif__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Creat__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Modif__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Inventari__Produ__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Movimient__Creat__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Producto__Provee__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__Recepcion__Produ__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__IDPro__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__Prove__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__IDReq__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="controleModel.FK__RequizaCo__Usuar__160F4887" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="controleModel.vw_PordutosDetalle" Width="2.375" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
