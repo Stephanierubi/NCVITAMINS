@@ -58,6 +58,7 @@ namespace NCVITAMINS.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            //Validate view
             return View();
         }
 
@@ -115,6 +116,7 @@ namespace NCVITAMINS.Controllers
             {
                 return View(model);
             }
+
 
             // El código siguiente protege de los ataques por fuerza bruta a los códigos de dos factores. 
             // Si un usuario introduce códigos incorrectos durante un intervalo especificado de tiempo, la cuenta del usuario 
