@@ -1,0 +1,78 @@
+﻿@model DrugStoreMnngt.Models.BD.Usuarios
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        <h4>Editar usuarios</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ACTIVO)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label col-md-2 input-sm" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Contraseña", htmlAttributes: new { @class = "control-label col-md-2 input-sm" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.Contrasenia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2 input-sm" })
+            @{
+                var selectedusuario = Model.Tipo == 2 ? "selected" : "";
+                var selectedadmin = Model.Tipo == 1 ? "selected" : "";
+
+            }
+            <div class="col-md-10">
+                <select name="Tipo" class="form-control input-sm">
+                    <option value="1" @selectedadmin>Administrador</option>
+                    <option value="2" @selectedusuario>Vendedor</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelForModel("Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SUCURSAL, ViewBag.Sucursal as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SUCURSAL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Store, "Store", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => Model.Store, ViewBag.Store as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Store, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+
+    <a href="../Index" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+
+</div>

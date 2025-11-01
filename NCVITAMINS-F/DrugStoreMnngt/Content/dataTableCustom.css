@@ -1,0 +1,51 @@
+﻿.odd {
+    background-color: #59abff85 !important;
+    font-family: Arial,Tahoma !important;
+    font-variant: normal;
+}
+
+.even {
+    background-color: #f9f9f9 !important;
+}
+.sorting_1 {
+    font-weight: bold !important;
+    background-color: #3c8dd938 !important;
+}
+.sorting_asc {
+    
+    background-color: #3c8dd9c2 !important;
+}
+.sorting_desc {
+
+    background-color: #3c8dd9c2 !important;
+}
+.sorting {
+    background-color: #3c8dd938 !important;
+}
+
+table.dataTable td {
+    font-size: 0.9em;
+}
+
+table.dataTable tr.dtrg-level-0 td {
+    font-size: 1em;
+}
+
+.sorting_1 > a {    
+    
+}
+
+.group-start {
+    font-weight: bold;
+    color:white;
+    background-color: #2374bb!important;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right!important;
+    
+}
+
+.dataTables_wrapper .dataTables_length {
+    padding: 5px!important;    
+}

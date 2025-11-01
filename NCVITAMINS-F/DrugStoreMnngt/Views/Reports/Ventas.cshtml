@@ -1,0 +1,114 @@
+﻿@model DrugStoreMnngt.Models.FilterReport
+
+@{
+    ViewBag.Title = "Ventas";
+}
+
+<h2>Ventas</h2>
+<link href="~/Content/ReportDataTableCustom.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Ventas", "Reports", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    <div>
+        <div class="col-sm-2 " style="width: 50%;">
+            <div class="form-group ">
+                @Html.LabelForModel("Desde:", htmlAttributes: new { @class = " col-md-2" })
+                <div class="col-md-10 customMargin">
+                    @Html.TextBoxFor(model => model.fromDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelForModel("Hasta:", htmlAttributes: new { @class = "col-md-2" })
+                <div class="col-md-10 customMargin">
+                    @Html.TextBoxFor(model => model.toDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelForModel("Filter For:", htmlAttributes: new { @class = " col-md-2" })
+                    <div class="col-md-10 customMargin">
+                        @Html.DropDownListFor(model => model.type, new List<SelectListItem>
+                   {new SelectListItem{ Text= "", Value = "" },
+                           new SelectListItem{ Text= "Check Date", Value = "Check_Date" },
+                           new SelectListItem{ Text= "Created Date", Value = "Created_Date" },
+                              new SelectListItem{ Text= "Move To Zeus Date", Value = "Move_to_Zeus_Date" },
+                   }, htmlAttributes: new { @class = "form-control customSelect" })
+                        @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group customMargin">
+                <div style="margin-left: 20%;">
+                    <input type="submit" value="Buscar" class="btn btn-secondary" />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+}
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Numero Factura
+            </th>
+            <th>
+                Fecha y Hora
+            </th>
+            <th> Neto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Lista != null)
+        {
+            var listaTipada = ViewBag.Lista as IEnumerable<DrugStoreMnngt.Models.FacturaCustom>;
+            foreach (var item in listaTipada)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Neto)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+    
+</table>
+
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+          //  $('#tablelist').append('<caption style="caption-side:head;color:black;width=200px;"><div> Reporte de Credito \n Desde: @ViewBag.FI  Hasta: @ViewBag.FF  \n Generado por <strong>@ViewBag.UserName </strong> \n  Fecha Creación: <strong>@DateTime.Now </strong> </div ></caption>');
+
+            //var oTable = $('#tablelist').DataTable();
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: true,
+                dom: 'Blfrtip',
+                buttons: [
+                    'csv', 'excel', {
+                        extend: 'print'
+                        },
+                ]
+
+            });
+
+        });
+
+    </script>
+
+}

@@ -1,0 +1,170 @@
+﻿@using Microsoft.AspNet.Identity
+@using SecurityShell.Models;
+@if (Request.IsAuthenticated)
+{
+
+    if (InformationIdentity.TypeID() == 1)
+    {
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
+            <ul class="nav navbar-nav  pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administracion<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Proveedores", "Index", "Proveedors")</li>
+                        <li>@Html.ActionLink("Tiendas", "Tienda", "CatalogDetails")</li>
+                        <li>@Html.ActionLink("Almacenes", "Almacen", "CatalogDetails")</li>
+                        <li>@Html.ActionLink("Presentaciones", "TipoPrecentacion", "CatalogDetails")</li>
+                        <li>@Html.ActionLink("Laboratorios", "Laboratorio", "CatalogDetails")</li>
+                        <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
+                        <li>@Html.ActionLink("Productos", "Index", "Productoes")</li>
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Empleados", "Index", "Empleados")</li>
+                        <li>@Html.ActionLink("Compania", "Index", "COMPANIAs")</li>
+                    </ul>
+
+
+                <li id="mone" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Compras<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Compras", "detallesRequiza", "Productoes")</li>
+                        <li>@Html.ActionLink("Traslado de producto", "DetalleMovimientosTraslado", "Productoes")</li>
+                        <li>@Html.ActionLink("Conciliación", "index", "inventario")</li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Venta<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Consultar productos existentes", "ConsultarProducto", "Productoes")</li>
+                        @*<li>@Html.ActionLink("Facturar", "Index", "Facturas")</li>*@
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @*<li>@Html.ActionLink("Ventas", "Ventas", "Reports")</li>*@
+                        <li>@Html.ActionLink("Productos Vendidos", "productosVendidos", "Reports")</li>
+                        <li>@Html.ActionLink("Productos Minimos", "productStockMinimo", "Reports")</li>
+                        <li>@Html.ActionLink("Ventas de Productos por Mes", "VentasProductosMensuales", "Reports")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Cierre Caja Revision", "CierreCajaAdmin", "Reports")</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    }
+    else if (InformationIdentity.TypeID() == 2)
+    {
+        <div class="navbar-collapse collapse">
+
+            @Html.Partial("_LoginPartial")
+            <ul class="nav navbar-nav pull-right">
+
+                <li id="mone" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Proveedores", "Index", "Proveedors")</li>
+                        <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
+                        <li>@Html.ActionLink("Productos", "Index", "Productoes")</li>
+                    </ul>
+                </li>
+                <li id="mone" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Compras<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Compras", "detallesRequiza", "Productoes")</li>
+                    </ul>
+
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Venta<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Consultar Productos Existentes", "ConsultarProducto", "Productoes")</li>
+                        <li>@Html.ActionLink("Facturar", "Index", "Facturas")</li>
+                        <li>@Html.ActionLink("Confirmar Productos Factura", "confirmarProductos", "Facturas")</li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Productos Vendidos", "productosVendidos", "Reports")</li>
+                        <li>@Html.ActionLink("Productos Minimos", "productStockMinimo", "Reports")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Cierre Caja", "CierreCaja", "Reports")</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    }
+    else if (InformationIdentity.TypeID() == 3)
+    {
+        <nav>
+            <div class="nav-container">
+                <div class="mobile-menu-toggle">☰</div>
+                <ul class="main-menu">
+                    <li><a href="#">Home</a></li>
+                    <li>
+                        <a href="#">Products ▾</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Electronics</a></li>
+                            <li>
+                                <a href="#">Computers ▸</a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">Laptops</a></li>
+                                    <li><a href="#">Desktops</a></li>
+                                    <li><a href="#">Accessories</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Furniture</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Services ▾</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Consulting</a></li>
+                            <li><a href="#">Training</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    }
+
+}
+else
+{
+    <div class="navbar-collapse collapse">
+        @Html.Partial("_LoginPartial")
+    </div>
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mobile menu toggle
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const mainMenu = document.querySelector('.main-menu');
+
+        toggle.addEventListener('click', function () {
+            mainMenu.classList.toggle('active');
+        });
+
+        // Handle submenu clicks on mobile
+        if (window.innerWidth <= 768) {
+            const menuItemsWithSubmenu = document.querySelectorAll('.main-menu li:has(.sub-menu)');
+
+            menuItemsWithSubmenu.forEach(item => {
+                const link = item.querySelector('a');
+                const subMenu = item.querySelector('.sub-menu');
+
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    subMenu.classList.toggle('active');
+                });
+            });
+        }
+    });
+</script>

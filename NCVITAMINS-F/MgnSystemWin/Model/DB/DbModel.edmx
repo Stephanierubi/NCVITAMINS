@@ -1,0 +1,921 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_A54362_mngModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="Type" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatalogDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatalogId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Isdefault" Type="bit" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="OptionalInformation" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar" MaxLength="200" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="200" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroFactura" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Comentario" Type="varchar" MaxLength="100" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="Pagada" Type="bit" />
+          <Property Name="Revertida" Type="bit" />
+          <Property Name="Cancelada" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FacturaDetalle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacturaID" Type="int" />
+          <Property Name="ProductoID" Type="int" />
+          <Property Name="Cantidad" Type="float" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="IVA" Type="float" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="DescripcionEspecifica" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DescripcionGeneral" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FechaVencimiento" Type="datetime" />
+          <Property Name="TipoPrecentacionID" Type="int" />
+          <Property Name="PrecioCompra" Type="float" />
+          <Property Name="PrecioVenta" Type="float" />
+          <Property Name="ProveedorID" Type="int" />
+          <Property Name="CodigoBarra" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CantidadDisponible" Type="float" />
+          <Property Name="CantidadPrecentacion" Type="float" />
+          <Property Name="TipoVentaID" Type="int" />
+          <Property Name="Almacen" Type="int" />
+          <Property Name="Laboratorio" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IVA" Type="bit" />
+          <Property Name="StockMinimo" Type="float" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="200" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecepcionPedido">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoID" Type="int" />
+          <Property Name="Cantidad" Type="float" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="150" />
+          <Property Name="Contrasenia" Type="nvarchar" MaxLength="150" />
+          <Property Name="Tipo" Type="int" />
+        </EntityType>
+        <Association Name="FK__CatalogDe__Catal__3B75D760">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CatalogDetail">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Factura__ClientI__4E88ABD4">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FacturaDe__Factu__5441852A">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacturaDetalle">
+              <PropertyRef Name="FacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FacturaDe__Produ__5535A963">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacturaDetalle">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__Almace__46E78A0C">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Almacen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__Labora__47DBAE45">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Laboratorio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__Provee__44FF419A">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__TipoPr__440B1D61">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoPrecentacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__TipoVe__45F365D3">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recepcion__Produ__5812160E">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="RecepcionPedido" Type="Self.RecepcionPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecepcionPedido">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__Tipo__3E52440B">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Factura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DB_A54362_mngModelStoreContainer">
+          <EntitySet Name="Catalog" EntityType="Self.Catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CatalogDetail" EntityType="Self.CatalogDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecepcionPedido" EntityType="Self.RecepcionPedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CatalogDe__Catal__3B75D760" Association="Self.FK__CatalogDe__Catal__3B75D760">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Factura__ClientI__4E88ABD4" Association="Self.FK__Factura__ClientI__4E88ABD4">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FacturaDe__Factu__5441852A" Association="Self.FK__FacturaDe__Factu__5441852A">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FacturaDe__Produ__5535A963" Association="Self.FK__FacturaDe__Produ__5535A963">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__Almace__46E78A0C" Association="Self.FK__Producto__Almace__46E78A0C">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__Labora__47DBAE45" Association="Self.FK__Producto__Labora__47DBAE45">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__Provee__44FF419A" Association="Self.FK__Producto__Provee__44FF419A">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__TipoPr__440B1D61" Association="Self.FK__Producto__TipoPr__440B1D61">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__TipoVe__45F365D3" Association="Self.FK__Producto__TipoVe__45F365D3">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recepcion__Produ__5812160E" Association="Self.FK__Recepcion__Produ__5812160E">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="RecepcionPedido" EntitySet="RecepcionPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__Tipo__3E52440B" Association="Self.FK__Usuarios__Tipo__3E52440B">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_A54362_mngModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatalogDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatalogId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Isdefault" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="OptionalInformation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="Pagada" Type="Boolean" />
+          <Property Name="Revertida" Type="Boolean" />
+          <Property Name="Cancelada" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          </EntityType>
+        <EntityType Name="FacturaDetalle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacturaID" Type="Int32" />
+          <Property Name="ProductoID" Type="Int32" />
+          <Property Name="Cantidad" Type="Double" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="IVA" Type="Double" />
+          </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionEspecifica" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionGeneral" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="3" />
+          <Property Name="TipoPrecentacionID" Type="Int32" />
+          <Property Name="PrecioCompra" Type="Double" />
+          <Property Name="PrecioVenta" Type="Double" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="CodigoBarra" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadDisponible" Type="Double" />
+          <Property Name="CantidadPrecentacion" Type="Double" />
+          <Property Name="TipoVentaID" Type="Int32" />
+          <Property Name="Almacen" Type="Int32" />
+          <Property Name="Laboratorio" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IVA" Type="Boolean" />
+          <Property Name="StockMinimo" Type="Double" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecepcionPedido">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoID" Type="Int32" />
+          <Property Name="Cantidad" Type="Double" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Contrasenia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__CatalogDe__Catal__3B75D760">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CatalogDetail">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__Almace__46E78A0C">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Almacen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__Labora__47DBAE45">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Laboratorio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__TipoPr__440B1D61">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoPrecentacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__TipoVe__45F365D3">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__Tipo__3E52440B">
+          <End Role="CatalogDetail" Type="Self.CatalogDetail" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Factura__ClientI__4E88ABD4">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FacturaDe__Factu__5441852A">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacturaDetalle">
+              <PropertyRef Name="FacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FacturaDe__Produ__5535A963">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="FacturaDetalle" Type="Self.FacturaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacturaDetalle">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__Provee__44FF419A">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recepcion__Produ__5812160E">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="RecepcionPedido" Type="Self.RecepcionPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecepcionPedido">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A54362_mngEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Catalog" EntityType="Self.Catalog" />
+          <EntitySet Name="CatalogDetail" EntityType="Self.CatalogDetail" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" />
+          <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="RecepcionPedido" EntityType="Self.RecepcionPedido" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK__CatalogDe__Catal__3B75D760" Association="Self.FK__CatalogDe__Catal__3B75D760">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__Almace__46E78A0C" Association="Self.FK__Producto__Almace__46E78A0C">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__Labora__47DBAE45" Association="Self.FK__Producto__Labora__47DBAE45">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__TipoPr__440B1D61" Association="Self.FK__Producto__TipoPr__440B1D61">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__TipoVe__45F365D3" Association="Self.FK__Producto__TipoVe__45F365D3">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__Tipo__3E52440B" Association="Self.FK__Usuarios__Tipo__3E52440B">
+            <End Role="CatalogDetail" EntitySet="CatalogDetail" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Factura__ClientI__4E88ABD4" Association="Self.FK__Factura__ClientI__4E88ABD4">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FacturaDe__Factu__5441852A" Association="Self.FK__FacturaDe__Factu__5441852A">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FacturaDe__Produ__5535A963" Association="Self.FK__FacturaDe__Produ__5535A963">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__Provee__44FF419A" Association="Self.FK__Producto__Provee__44FF419A">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recepcion__Produ__5812160E" Association="Self.FK__Recepcion__Produ__5812160E">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="RecepcionPedido" EntitySet="RecepcionPedido" />
+          </AssociationSet>
+          <FunctionImport Name="getProducto" ReturnType="Collection(DB_A54362_mngModel.getProducto_Result)" />
+          <FunctionImport Name="GetFactura" ReturnType="Collection(DB_A54362_mngModel.GetFactura_Result)">
+            <Parameter Name="Factura" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="getProducto_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DescripcionEspecifica" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="DescripcionGeneral" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="FechaVencimiento" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TipoPrecentacionID" Nullable="true" />
+          <Property Type="Double" Name="PrecioCompra" Nullable="true" />
+          <Property Type="Double" Name="PrecioVenta" Nullable="true" />
+          <Property Type="Int32" Name="ProveedorID" Nullable="true" />
+          <Property Type="String" Name="CodigoBarra" Nullable="true" MaxLength="1000" />
+          <Property Type="Double" Name="CantidadDisponible" Nullable="true" />
+          <Property Type="Double" Name="CantidadPrecentacion" Nullable="true" />
+          <Property Type="Int32" Name="TipoVentaID" Nullable="true" />
+          <Property Type="Int32" Name="Almacen" Nullable="true" />
+          <Property Type="Int32" Name="Laboratorio" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="Boolean" Name="IVA" Nullable="true" />
+          <Property Type="Double" Name="StockMinimo" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="String" Name="TPrencentacionName" Nullable="true" />
+          <Property Type="String" Name="TVentaName" Nullable="true" />
+          <Property Type="String" Name="AlmacenName" Nullable="true" />
+          <Property Type="String" Name="LaboratorioName" Nullable="true" />
+          <Property Type="String" Name="ProveedorNombre" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetFactura_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="Int32" Name="FacturaID" Nullable="true" />
+          <Property Type="Int32" Name="ProductoID" Nullable="true" />
+          <Property Type="Double" Name="Cantidad" Nullable="true" />
+          <Property Type="Double" Name="Valor" Nullable="true" />
+          <Property Type="Double" Name="IVA" Nullable="true" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_A54362_mngModelStoreContainer" CdmEntityContainer="DB_A54362_mngEntities">
+          <EntitySetMapping Name="Catalog">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.Catalog">
+              <MappingFragment StoreEntitySet="Catalog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatalogDetail">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.CatalogDetail">
+              <MappingFragment StoreEntitySet="CatalogDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Isdefault" ColumnName="Isdefault" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="OptionalInformation" ColumnName="OptionalInformation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factura">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Pagada" ColumnName="Pagada" />
+                <ScalarProperty Name="Revertida" ColumnName="Revertida" />
+                <ScalarProperty Name="Cancelada" ColumnName="Cancelada" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaDetalle">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.FacturaDetalle">
+              <MappingFragment StoreEntitySet="FacturaDetalle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="DescripcionEspecifica" ColumnName="DescripcionEspecifica" />
+                <ScalarProperty Name="DescripcionGeneral" ColumnName="DescripcionGeneral" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="TipoPrecentacionID" ColumnName="TipoPrecentacionID" />
+                <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
+                <ScalarProperty Name="CantidadDisponible" ColumnName="CantidadDisponible" />
+                <ScalarProperty Name="CantidadPrecentacion" ColumnName="CantidadPrecentacion" />
+                <ScalarProperty Name="TipoVentaID" ColumnName="TipoVentaID" />
+                <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+                <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecepcionPedido">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.RecepcionPedido">
+              <MappingFragment StoreEntitySet="RecepcionPedido">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DB_A54362_mngModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getProducto" FunctionName="DB_A54362_mngModel.Store.getProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A54362_mngModel.getProducto_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="DescripcionEspecifica" ColumnName="DescripcionEspecifica" />
+                <ScalarProperty Name="DescripcionGeneral" ColumnName="DescripcionGeneral" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="TipoPrecentacionID" ColumnName="TipoPrecentacionID" />
+                <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
+                <ScalarProperty Name="CantidadDisponible" ColumnName="CantidadDisponible" />
+                <ScalarProperty Name="CantidadPrecentacion" ColumnName="CantidadPrecentacion" />
+                <ScalarProperty Name="TipoVentaID" ColumnName="TipoVentaID" />
+                <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+                <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="TPrencentacionName" ColumnName="TPrencentacionName" />
+                <ScalarProperty Name="TVentaName" ColumnName="TVentaName" />
+                <ScalarProperty Name="AlmacenName" ColumnName="AlmacenName" />
+                <ScalarProperty Name="LaboratorioName" ColumnName="LaboratorioName" />
+                <ScalarProperty Name="ProveedorNombre" ColumnName="ProveedorNombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFactura" FunctionName="DB_A54362_mngModel.Store.GetFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A54362_mngModel.GetFactura_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

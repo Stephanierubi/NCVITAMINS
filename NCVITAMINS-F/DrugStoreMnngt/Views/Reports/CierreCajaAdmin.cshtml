@@ -1,0 +1,146 @@
+﻿@model DrugStoreMnngt.Models.FilterReport
+@{
+    ViewBag.Title = "Cierre Caja <br>Cajero: " + @ViewBag.ResponsableNombre + "<br>Fecha : " + @ViewBag.FechaConsulta;
+}
+
+<link href="~/Content/ReportDataTableCustomExport.css" rel="stylesheet" />
+
+@using (Html.BeginForm("CierreCajaAdmin", "Reports", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    <div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.LabelForModel("Fecha:", htmlAttributes: new { @class = "" })
+                <div class="customMargin">
+                    @Html.TextBoxFor(model => model.toDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker col-md-8", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                @Html.Label("Usuario", new { @class = "form-label" })
+                <div class="customMargin">
+                    @Html.DropDownList("ResponsableId", new SelectList(@ViewBag.Responsable, "ID", "Name", Model.ResponsableId), new { @class = "form-control  col-md-8" })
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group col-md-1">
+                <label class="form-label" for="">&nbsp;</label>
+                <input type="submit" value="Buscar" class="btn btn-secondary" />
+
+            </div>
+        </div>
+
+
+    </div>
+}
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    
+        
+    
+    <thead>
+        <tr>Cajero: @ViewBag.ResponsableNombre </tr>
+        <tr>Fecha arqueo: @ViewBag.FechaConsulta </tr>
+        <tr>
+            <th>
+                No
+            </th>
+            <th>
+                Hora
+            </th>
+            <th>
+                Producto
+            </th>
+            <th>
+                Forma Pago
+            </th>
+            <th>
+                Qty
+            </th>
+            <th>
+                Neto
+            </th>
+        </tr>
+    </thead>
+        <tbody>
+            @if (ViewBag.Lista != null)
+            {
+                var listaTipada = ViewBag.Lista as IEnumerable<DrugStoreMnngt.Models.BD.CIERRECAJAGENERAR_Result>;
+                foreach (var item in listaTipada)
+                {
+
+
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ROW_NUMBERCount)
+                        </td>
+                        <td>
+                            @if (item.Fecha.HasValue)
+                            {
+                                var hora = item.Fecha.Value.ToString("HH:mm");
+                                @Html.DisplayFor(modelItem => hora)
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodigoProducto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Creador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Neto)
+                        </td>
+                    </tr>
+
+                }
+            }
+        </tbody>
+
+</table>
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+
+                                ;
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-weight', 'bold');
+                        }
+                    },
+                    {
+                        
+                        extend: 'pdfHtml5',
+                        pageSize: 'A6'
+                    }
+                ]
+
+            });
+
+        });
+
+    </script>
+
+}

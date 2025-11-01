@@ -1,0 +1,107 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.InventarioCustom>
+
+@{
+    ViewBag.Title = "Lista conciliación";
+}
+<br>
+@if (!Model.Any(a => a.Cerrado == null))
+{
+    <p>
+        @Html.ActionLink("Nuevo inventario", "Conciliacion")
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Creado el
+            </th>
+            <th>
+                Creado por
+            </th>
+            <th>
+                Modificado el
+            </th>
+            <th>
+                Modificado por
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderByDescending(o=>o.ModifiedOn))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdByName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modifiedByName)
+                </td>
+                <td>
+
+                    @{
+                        var colorstatus = "";
+                        var status = "";
+                        if (item.Cerrado == null)
+                        {
+                            status = "Pendiente";
+                            colorstatus = "#ec971f";
+                        }
+                        else if (item.Cerrado.Value == false)
+                        {
+                            status = "Descartado";
+                            colorstatus = "#c9302c";
+                        }
+                        else if (item.Cerrado.Value == true)
+                        {
+                            status = "Cerrado";
+                            colorstatus = "#337ab7";
+                        }
+                    }
+                    <label class="badge" style="background:@colorstatus;color:white">@status</label>
+                </td>
+                <td>
+                    <a href="@Url.Action("Conciliacion","Inventario",new { conciliacionId=@item.Id})" class="btn btn-@(item.Cerrado==null?"warning":"info") btn-xs"><span class="glyphicon glyphicon-@(item.Cerrado==null?"pencil":"search")"></span> @(item.Cerrado==null? "Editar": "Ver detalle")</a>
+                    @if (item.Cerrado == null)
+                    {
+                        <a href="@Url.Action("Cerrar","Inventario",new { conciliacionId=@item.Id,cerrar=true})" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-lock"></span> Cerrar</a>
+                        <a href="@Url.Action("Cerrar","Inventario",new { conciliacionId=@item.Id,cerrar=false})" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-floppy-remove"></span> Descartar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts
+    {
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('.table').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                "order": [[1, "desc"]],
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,122 @@
+﻿@model DrugStoreMnngt.Models.FilterReport
+
+@{
+    ViewBag.Title = "VentasProductosMensuales";
+}
+
+<h2>VentasProductosMensuales</h2>
+
+@using (Html.BeginForm("VentasProductosMensuales", "Reports", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    <div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.LabelForModel("Año:", htmlAttributes: new { @class = "" })
+                <div class="customMargin">
+                    @Html.TextBoxFor(model => model.filterString, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                @Html.LabelForModel("Mes:", htmlAttributes: new { @class = "" })
+                <div class="customMargin">
+                    @Html.TextBoxFor(model => model.filterStringF, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                    @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group col-md-1">
+                <label class="form-label" for="">&nbsp;</label>
+                <input type="submit" value="Buscar" class="btn btn-secondary" />
+
+            </div>
+        </div>
+
+
+    </div>
+}
+<table id="tblComprasCliente" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Producto
+            </th>
+            <th>
+                Año
+            </th>
+            <th>
+                Mes
+            </th>
+            <th>
+                Descripcion Especifica
+            </th>
+            <th>
+                Descripcion General
+            </th>
+            <th>
+                Venta
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Lista != null)
+        {
+            var listaTipada = ViewBag.Lista as IEnumerable<DrugStoreMnngt.Models.BD.vw_VentasPorProductoMensuales>;
+            foreach (var item in listaTipada)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PROUCTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Anio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionEspecifica)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionGeneral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VENTAS)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalle Ventas", "VentaProductoMensualesUnidad", new { anio = item.Anio, mes = item.Mes, producto = item.PROUCTO })
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblComprasCliente').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16c950a1d0404783a0ebe9635161100c" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_A54362_mngModel.Catalog" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.CatalogDetail" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.Cliente" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.Factura" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.FacturaDetalle" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.Producto" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.Proveedor" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.RecepcionPedido" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A54362_mngModel.Usuarios" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__CatalogDe__Catal__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Producto__Almace__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Producto__Labora__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Producto__TipoPr__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Producto__TipoVe__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Usuarios__Tipo__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Factura__ClientI__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__FacturaDe__Factu__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__FacturaDe__Produ__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Producto__Provee__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A54362_mngModel.FK__Recepcion__Produ__5812160E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.DeatellesRequizaItemsCustom>
+@using SecurityShell.Models;
+@{
+    ViewBag.Title = "Detalle compras";
+}
+
+<h2>Compras de productos</h2>
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Nombre Producto
+            </th>
+            <th>
+                Laboratorio
+            </th>
+            <th>
+                Cantidad
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.laboratorio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Regresar", "detallesRequiza")
+</div>
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                     'excel'
+
+                ]
+
+            });
+            console.log("Info usuario id " + @InformationIdentity.TypeID());
+            function getButtonsString() {
+                var info;
+                if (@InformationIdentity.TypeID() !== 2) {
+                    info = "'copy', 'excel', 'pdf'";
+                }
+                return info;
+            }
+
+
+
+        });
+
+    </script>
+
+}

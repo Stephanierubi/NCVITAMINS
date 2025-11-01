@@ -1,0 +1,25 @@
+﻿.debitColor {
+    
+    color: #ff4000;
+    font-weight: bold;
+}
+
+.creditClor {
+    color: #00b33c;
+    font-weight: bold;
+}
+
+.redColorDebt {
+    color: #e60000;
+    font-weight: bold;
+}
+
+.txtColor {
+    color: #363030;
+    font-weight: bold;
+}
+
+.headColor {
+    color: #0000cc;
+    font-weight: bold;
+}

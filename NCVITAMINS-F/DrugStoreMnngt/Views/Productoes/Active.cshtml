@@ -1,0 +1,55 @@
+﻿@model DrugStoreMnngt.Models.BD.Producto
+
+@{
+    ViewBag.Title = "Activar Producto";
+}
+
+<h4>Esta seguro de habilitar este Producto?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionEspecifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescripcionEspecifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionGeneral)
+        </dt>
+
+        <dt>
+            @Html.DisplayFor(model => model.DescripcionGeneral)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVencimiento)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-group">
+                <input type="submit" value="Activar" class="btn btn-xs btn-primary" />
+         
+            <a href="../Index" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+        </div>
+    }
+</div>

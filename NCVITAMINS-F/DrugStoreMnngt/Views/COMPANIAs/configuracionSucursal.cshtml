@@ -1,0 +1,77 @@
+﻿@model IEnumerable<CCustomization.CustomClasses.configuracionSucursalCompania>
+@{
+    ViewBag.Title = "configuracionSucursal";
+}
+
+<h2>configuracionSucursal</h2>
+
+<p>
+    @Html.ActionLink("Crear tienda", "agregarConfiguracionsucursal")
+</p>
+<table id="tblCliente" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Sucursal
+            </th>
+            <th>
+               Tienda
+            </th>
+            <th>
+                Comentario
+            </th>
+            
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sucursal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tienda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.comentario)
+                </td>
+             
+
+                <td>
+                    @Html.ActionLink("Editar", "editarSucursal", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Tiendas Sucursal", "configuracionSucursal", new { id = item.ID }, new {@class="btn btn-default"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblCliente').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

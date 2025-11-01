@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.FacturaDetalleCustom>
+
+@{
+    ViewBag.Title = @ViewBag.NombreCompania + "<br> <br>Factura No:" + @ViewBag.NoFactura + " <br> Cajero: " + @ViewBag.ResponsableNombre + " <br> Fecha: " + @ViewBag.FechaConsulta;
+}
+
+<h4>Detalle Facturas</h4>
+
+<table id="tbldet" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th> Valor</th>
+            <th>Neto</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>
+
+@section scripts
+    {
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#tbldet').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+
+                                ;
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-weight', 'bold');
+                        }
+                    }
+
+                ]
+
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,85 @@
+﻿@model DrugStoreMnngt.Models.BD.CatalogDetail
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+@*<h2>Crear  @ViewBag.Title2</h2>*@
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Información @ViewBag.Title2</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CatalogId)
+        <div class="form-group">
+            @Html.LabelForModel("Nombre", htmlAttributes: new { @class = "control-label col-md-2 input-sm" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelForModel("Descripcion", htmlAttributes: new { @class = "control-label col-md-2 input-sm" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (Model.CatalogId == 3)
+        {
+
+            <div class="form-group">
+                @Html.LabelForModel("Default", htmlAttributes: new { @class = "control-label col-md-2 input-sm"})
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Isdefault, new { @class = "input-sm", @OnChange = "HideOrShowStore(this)" })
+                    @Html.ValidationMessageFor(model => model.Isdefault, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group" id="divStore" style="display:none">
+                @Html.LabelForModel("Tienda", htmlAttributes: new { @class = "control-label col-md-2 input-sm" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ParentId, @ViewBag.Tiendas as SelectList, new { @class = "form-control  input-sm" })
+                    @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<a href="@ViewBag.Title2" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script> 
+
+        $(document).ready(function () {
+            var option0 = $("#ParentId").find("option[value='0']");
+            option0.val(null);
+        });
+
+        function HideOrShowStore(sender) {
+
+            var $sender = $(sender);
+            if ($sender.prop('checked')) {
+
+                $('#divStore').show();
+            } else {
+                $('#divStore').hide();
+            }
+        }
+    </script>
+}

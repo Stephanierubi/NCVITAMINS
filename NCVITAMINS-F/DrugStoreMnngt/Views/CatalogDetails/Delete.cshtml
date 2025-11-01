@@ -1,0 +1,44 @@
+﻿@model DrugStoreMnngt.Models.BD.CatalogDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar  @ViewBag.Title2</h2>
+
+<h3>Seguro de Elimar?</h3>
+<div>
+    <h4>Informacion @ViewBag.Title2</h4>
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CatalogId)
+    <dl class="dl-horizontal">
+
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Descripcion
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+
+        @using (Html.BeginForm())
+        {
+
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Borrar" class="btn btn-default" /> 
+                
+            </div>
+        }
+</div>

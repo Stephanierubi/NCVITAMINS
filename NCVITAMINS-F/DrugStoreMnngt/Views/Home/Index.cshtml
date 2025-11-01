@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Principal";
+}
+<div>
+    <h1>Bienvenido al sistema <b style="color:darkblue;">@ViewBag.NombreLogeado</b></h1>
+
+    @if (SecurityShell.Models.InformationIdentity.TypeID() == 1)
+    {
+        <h4>Este es el resumen ventas netas de este año</h4>
+        <p><img src="~/Reports/garficaBSimpleAnual" /> </p>
+    }
+    else
+    {
+        <div>
+
+            <h4>Este es el resumen de sus ventas durante este año</h4>
+            <p><img src="~/Reports/garficaBarraSimple" /> </p>
+        </div>
+    }
+</div>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Ventas Netas Mensuales";
+}
+
+<h2>Ventas Netas Mensuales</h2>
+
+@{
+    //var dataView = new DataView(ViewBag.Venta);
+
+    var myChart2 = new Chart(width: 600, height: 400)
+        .AddTitle("Ventas Netas Mensuales")
+        .AddSeries(
+            name: "VentaNetaMensual",
+            xValue: ViewBag.Venta, xField:"Mes",
+            yValues: ViewBag.Venta, yFields: "Ventas")
+        .Write();
+}

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.FacturaCustom>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Lista de facturas</h4>
+
+<p>
+    @if (!ViewBag.ConciliacionAbierta)
+    {
+        <a href="@Url.Action("Invoice","Facturas")" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span> Agregar Factura</a>
+    }
+    else
+    {
+        <a class="btn btn-primary btn-xs" onclick="toastr.warning('Conciliación pendiente de procesar');"><span class="glyphicon glyphicon-plus"></span> Agregar Factura</a>
+    }
+</p>
+<table id="tblFacturas" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroFactura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th> Cliente</th>
+            <th> Tienda</th>
+            <th> Forma de Pago</th>
+            <th> Neto</th>
+            <th>Acciones</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.NombreResponsable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreTienda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormaPagoText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Neto)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalle", "Details", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Imprimir", "Imprimir", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
+                    @*|@Html.ActionLink("Borrar", "Delete", new { id = item.ID })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts
+    {
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#tblFacturas').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+        });
+
+    </script>
+}

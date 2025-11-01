@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.CatalogDetail>
+
+@{
+    ViewBag.Title = "Almacén";
+}
+
+@*<h2>Marcas</h2>*@
+<br>
+<p>
+    @Html.ActionLink("Crear almacén", "Create", new { Tipo = "Almacen" })
+</p>
+@*<button class="btn btn-default btn-sm pull-right" onclick="SetDefaultValue()">Establecer default</button>*@
+<table id="tblStorage" class="table table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Default
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => item.Isdefault, new { htmlAttributes = new { @almacenid = item.Id,@disabled="disabled", @readonly = "readonly" } })
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id, Tipo = "Almacen" }, new { @class = "btn btn-sm btn-info" }) 
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id, Tipo = "Almacen" }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblStorage').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+            });
+        });
+
+        function SetDefaultValue() {
+
+            var id = $("input[type='checkbox']:checked").attr('almacenid');
+            $.ajax({
+                dataType: "json",
+                url: `SetDefaultStorage?id=${id}`,
+                success: function (response) {
+
+                }
+            });
+        }
+
+        function DefaultClick(sender) {
+
+            var $sender = $(sender);
+
+            $("input[type='checkbox']").not($sender).each((index, item) => { $(item).prop('checked', false); })
+
+        }
+
+    </script>
+}

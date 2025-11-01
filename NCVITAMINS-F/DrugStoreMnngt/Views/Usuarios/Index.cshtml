@@ -1,0 +1,104 @@
+﻿@model IEnumerable<CCustomization.CustomClasses.UsuariosCustom>
+
+@{
+    ViewBag.Title = "Lista usuarios";
+}
+
+@*<h2>Index</h2>*@
+<br>
+<p>
+    @Html.ActionLink("Nuevo usuario", "Create",new {}, new {@class="btn btn-default"})
+</p>
+<table id="tblUser" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contrasenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Tienda
+            </th>
+            <th>
+                Sucursal
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contrasenia)
+                </td>
+                <td>
+
+                    @{ var usuario = item.Tipo == 1 ? "Administrador" : "Usuario";}
+                    @Html.DisplayFor(modelItem => usuario)
+                </td>
+                <td>
+                    @if (item.ACTIVO.HasValue)
+                    {
+                        var estado = item.ACTIVO.Value ? "Activo" : "Inactivo";
+                        @Html.DisplayFor(modelItem => estado)
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreTienda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreSucursal)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-info" })
+                    @if (item.ACTIVO.HasValue)
+                    {
+                        if (item.ACTIVO.Value)
+                        {
+                            @Html.ActionLink("Desactivar", "Desactivar", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Activar", "Activar", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" })
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+    {
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#tblUser').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+        });
+
+    </script>
+}

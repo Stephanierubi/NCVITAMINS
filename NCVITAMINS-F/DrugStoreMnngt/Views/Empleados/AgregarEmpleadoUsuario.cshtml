@@ -1,0 +1,44 @@
+﻿@model DrugStoreMnngt.Models.CustomInsert.EmpleadoUsarioCustomInsert
+
+@{
+    ViewBag.Title = "Agregar Usuario Empleado";
+}
+
+<h2>Usuario Empleado</h2>
+
+@using (Html.BeginForm("AgregarEmpleadoUsuario", "Empleados", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <h4>Empleado</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Empleado)
+
+        <div class="form-group">
+            @Html.Label("Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="form-control input-sm"> @ViewBag.NombreEmpleado </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Usuario, @ViewBag.Usuarios as SelectList, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+

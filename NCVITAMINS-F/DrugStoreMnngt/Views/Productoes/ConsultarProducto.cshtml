@@ -1,0 +1,169 @@
+﻿@model CCustomization.CustomClasses.FilterReport
+
+@{
+    ViewBag.Title = "Consutar productos existentes";
+}
+
+<h4>Consultar productos existentes</h4>
+
+@using (Html.BeginForm("ConsultarProducto", "Productoes", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    <div id="FilterDiv" class="col-md-12" style="padding:10px;border:1px solid #e1d9d9;padding-bottom: 0px;border-radius: 4px;margin-bottom:8px">
+        <div class="col-md-10">
+            <div class="form-group col-md-6">
+                @Html.LabelForModel("Código:", htmlAttributes: new { @style = "margin-top: 4px;", @class = "col-md-4 input-sm" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.filterString, new { @class = "form-control  input-sm" })
+
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelForModel("Marca:", htmlAttributes: new { @style = "margin-top: 4px;", @class = "col-md-4 input-sm" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.filterStringF, new { @class = "form-control  input-sm" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelForModel("Nombre:", htmlAttributes: new { @style = "margin-top: 4px;", @class = "col-md-4 input-sm" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.filterStringS, new { @class = "form-control input-sm " })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelForModel("Desc. General:", htmlAttributes: new { @style = "margin-top: 4px;", @class = "col-md-4 input-sm" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.filterStringT, new { @class = "form-control  input-sm" })
+                </div>
+            </div>
+
+            @*<div class="form-group col-md-4">
+                    @Html.LabelForModel("Complemento:", htmlAttributes: new { @style = "margin-top: 4px;", @class = "col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.filterStringS, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.filterStringT, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+        </div>
+        <div class="form-group col-md-2">
+
+            <button type="submit" class="btn btn-default btn-sm">
+                <i class="glyphicon glyphicon-search"></i> Buscar
+            </button>
+            <button type="button" class="btn btn-default btn-sm" onclick="ClearText();">
+                <i class="glyphicon glyphicon-erase"></i> Borrar
+            </button>
+        </div>
+
+
+    </div>
+}
+<div>
+    <table id="tablelist" class="table-striped display compact dt-body-center dt-head-center">
+        <thead>
+            <tr>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Descripcion Especifica
+                </th>
+                <th>
+                    Descripcion General
+                </th>
+                <th>
+                    Marca
+                </th>
+                <th>
+                    Vencimiento
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Cod. Barra
+                </th>
+                <th>
+                    Cant. Disponible
+                </th>
+                <th>
+                    Cant. Presentacion
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.Lista != null)
+            {
+                var listaTipada = ViewBag.Lista as IEnumerable<DrugStoreMnngt.Models.ProductoCustom>;
+                foreach (var item in listaTipada)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodigoProducto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescripcionEspecifica)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescripcionGeneral)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Marca)
+                        </td>
+                        <td>
+                            @{string fec = string.Empty;
+                                if (item.FechaVencimiento.HasValue)
+                                {
+                                    fec = item.FechaVencimiento.Value.ToString("dd/MM/yy");
+                                }}
+                            @Html.DisplayFor(modelItem => fec)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PrecioVenta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodigoBarra)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CantidadDisponible)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CantidadPrecentacion)
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts
+    {
+    <script>
+
+        function ClearText() {
+
+            $("#FilterDiv input").each(function (index, item) { $(item).val(null); });
+
+        }
+
+        $(document).ready(function () {
+
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: true,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+                ]
+
+            });
+
+        });
+
+    </script>
+
+}

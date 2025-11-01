@@ -1,0 +1,9 @@
+﻿table.dataTable.display tbody tr.even {
+    background-color: #f9f9f9 !important;
+    color: #020044;
+}
+
+table.dataTable.display tbody tr.odd {
+    background-color: #f9f9f9 !important;
+    color: #020044;
+}

@@ -1,0 +1,202 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.FacturaCustomConfirmacion>
+@using SecurityShell.Models;
+@{
+    ViewBag.Title = "Procesar facturas";
+}
+
+<h4>Lista de productos a confirmar</h4>
+
+
+<div>
+    @if (ViewBag.ConciliacionAbierta)
+    {
+        <div class="pull-right" style="margin-left:3px">
+            <label class="badge" style="background:#ec971f;color:#000"> <span class="glyphicon glyphicon-warning-sign"></span>Conciliacion abierta</label>
+        </div>
+    }
+    <div class="pull-right">
+        <button onclick="ProcessSelection(false)" @(ViewBag.ConciliacionAbierta ? "disabled" : "") class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-share-alt"></span>
+            <span>
+                <strong>Devolver</strong>
+            </span>
+        </button>
+    </div>
+    <div class="pull-right" style="margin-right:3px">
+        <button onclick="ProcessSelection(true)" @(ViewBag.ConciliacionAbierta ? "disabled" : "") class="btn btn-primary btn-xs">
+            <span class="glyphicon glyphicon-ok"></span>
+            <span>
+                <strong>Aprobar</strong>
+            </span>
+        </button>
+    </div>
+
+</div>
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Factura
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Producto
+            </th>
+            <th>
+                Cod Producto
+            </th>
+            <th>
+                Cod Barra
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td FacturaDetalleId="@item.ID">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFactura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroFactura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoBarra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    <div>
+                        <div class="col-md-6">
+                            <button href="#" onclick="ProcesarFactura(this,true,@item.ID)" @(ViewBag.ConciliacionAbierta ? "disabled" : "") class="btn btn-primary btn-xs">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                <span>
+                                    <strong>Aprobar</strong>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button onclick="ProcesarFactura(this,false,@item.ID)" @(ViewBag.ConciliacionAbierta ? "disabled" : "") class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-share-alt"></span>
+                                <span>
+                                    <strong>Devolver</strong>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                     'excel'
+
+                ], columnDefs: [
+                    {
+                        'orderable': false,
+                        'targets': 0,
+                        'checkboxes': {
+                            'selectRow': true
+                        }
+                    }
+                ]
+            });
+            console.log("Info usuario id " + @InformationIdentity.TypeID());
+            function getButtonsString() {
+                var info;
+                if (@InformationIdentity.TypeID() !== 2) {
+                    info = "'copy', 'excel', 'pdf'";
+                }
+                return info;
+            }
+
+
+
+        });
+
+        function ProcesarFactura(sender,aprovado,id) {
+
+            showLoadingProcess(true, "Procesando factura");
+            var action = "aprobarProducto";
+            if (aprovado == false) {
+                action = "denegarProducto";
+            }
+
+            row = $(sender).closest('tr');
+
+            $.ajax({
+                url: `${action}?ID=${id}`,
+                type: "get",
+                success: function (result) {
+                    showLoadingProcess(false);
+                    var myTable = $('#tablelist').DataTable();
+                    myTable.row(row).remove().draw();
+
+                }
+            });
+
+
+
+        }
+
+        function ProcessSelection(aprovado) {
+
+            showLoadingProcess(true, "Procesando factura");
+            var arrayIds = $("input.dt-checkboxes:checked").map(function (index, item) { return parseInt($(item).closest('td').attr('FacturaDetalleId')); }).toArray();
+            var action = "aprobarProducto";
+            if (aprovado == false) {
+                action = "denegarProducto";
+            }
+            $.ajax({
+                url: `${action}?ID=${arrayIds.toString()}`,
+                type: "get",
+                success: function (result) {
+                    showLoadingProcess(false);
+                    var myTable = $('#tablelist').DataTable();
+                    $("input.dt-checkboxes:checked")
+                        .each(function (index, item) {
+                            myTable.row($(item).closest('tr')).remove().draw();
+                        });
+
+                }
+            });
+        }
+
+    </script>
+
+}

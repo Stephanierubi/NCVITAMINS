@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/DataTables/css/jquery.dataTables.min.css")
+    @Styles.Render("~/Content/DataTables/css/dataTables.checkboxes.css")
+    @Styles.Render("~/Content/chosen.css")
+    @Styles.Render("~/Content/customizingStylesGeneral.css")
+    @Styles.Render("~/Content/buttons.dataTables.css")
+    @Styles.Render("~/Content/toastr.css")
+    @Styles.Render("~/Content/dataTableCustom.css")
+    @*@Styles.Render("~/Content/mdb.min.css")
+    @Styles.Render("~/Content/mdb.rtl.min.css")*@
+    @Styles.Render("~/Content/navbarCustom.css")
+
+</head>
+<body>
+    <div class="navbar  navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="glyphicon glyphicon-transfer nessColor navbar-brand"></span>  @Html.ActionLink("Management store", "Index", "Home", new { area = "" }, new { @class = "nessColor navbar-brand " })
+            </div>
+            @Html.Partial("_menuPartial")
+
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+
+
+        <footer class="footer2">
+
+            <p>&copy; @DateTime.Now.Year - Management store Develop by <a href="http://www.nicadevs.com">NICADEVS</a></p>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.checkboxes.min.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.rowGroup.js")
+    @Scripts.Render("~/Scripts/chosen.jquery.min.js")
+    @Scripts.Render("~/Scripts/dataTables.buttons.min.js")
+    @Scripts.Render("~/Scripts/buttons.flash.min.js")
+    @Scripts.Render("~/Scripts/jszip.min.js")
+    @Scripts.Render("~/Scripts/pdfmake.min.js")
+    @Scripts.Render("~/Scripts/vfs_fonts.js")
+    @Scripts.Render("~/Scripts/buttons.html5.min.js")
+    @Scripts.Render("~/Scripts/buttons.print.min.js")
+    @Scripts.Render("~/Scripts/customImputNumber.js")
+    @Scripts.Render("~/Scripts/toastr.js")
+    @Scripts.Render("~/Scripts/site.js")
+    @Scripts.Render("~/Scripts/jquery.blockUI.js")
+    @Scripts.Render("~/Scripts/jquery.mask.min.js")
+    @*@Scripts.Render("~/Scripts/mdb.es.min.js")
+    @Scripts.Render("~/Scripts/mdb.umd.min.js")*@
+    @*@Scripts.Render("~/Scripts/navbarCustom.js")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

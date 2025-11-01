@@ -1,0 +1,115 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.vw_CompraSCliente>
+
+@{
+    ViewBag.Title = "ComprasCliente";
+}
+
+<h2>Compras Cliente</h2>
+
+
+<table  id="tblComprasCliente" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Numero Factura
+            </th>
+            <th>
+                Fecha Factura
+            </th>
+            <th>
+               Forma Pago
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRECLIENTE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionGeneral)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionEspecifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CANTIDAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VALOR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MONTO)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacturaID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHAFACTURA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FORMAPAGO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRECLIENTE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionGeneral)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionEspecifica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CANTIDAD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VALOR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MONTO)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a href="../Index" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+
+</div>
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblComprasCliente').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

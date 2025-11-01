@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.CatalogDetail>
+
+@{
+    ViewBag.Title = "Marcas";
+}
+
+@*<h2>Marcas</h2>*@
+<br>
+<p>
+    @Html.ActionLink("Crear Tipo Venta", "Create",new {Tipo = "TipoVenta" })
+</p>
+<table class="table">
+    <tr>        
+        <th>
+        Nombre
+        </th>
+        <th>
+          Descripcion
+        </th> 
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>        
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id, Tipo = "TipoVenta" }, new { @class = "btn btn-sm btn-info" })            
+            @Html.ActionLink("Borrar", "Delete", new { id=item.Id, Tipo = "TipoVenta" }, new { @class = "btn btn-sm btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

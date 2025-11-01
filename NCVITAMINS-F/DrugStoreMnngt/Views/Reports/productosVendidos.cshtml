@@ -1,0 +1,418 @@
+﻿@model DrugStoreMnngt.Models.FilterReport
+@{
+    ViewBag.Title = "Productos Vendidos";
+    var jsonResponsable = Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.Responsable);
+
+    var jsonFormaPago = Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.formaPago);
+
+}
+
+
+<h4>Productos Vendidos</h4>
+
+<link href="~/Content/ReportDataTableCustom.css" rel="stylesheet" />
+<input hidden id="hdResp" value="@jsonResponsable">
+<input hidden id="hdFormaPago" value="@jsonFormaPago">
+@using (Html.BeginForm("productosVendidos", "Reports", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    <div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.LabelForModel("Desde:", htmlAttributes: new { @class = "" })
+                <div class="customMargin">
+                    @Html.TextBoxFor(model => model.fromDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker  col-md-8", @required = "required" })
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                @Html.LabelForModel("Hasta:", htmlAttributes: new { @class = "" })
+                <div class="customMargin">
+                    @Html.TextBoxFor(model => model.toDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker col-md-8", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group col-md-3">
+                @Html.Label("Responsable", new { @class = "form-label" })
+                <div class="customMargin">
+                    @Html.DropDownList("ResponsableId", new SelectList(@ViewBag.Responsable, "ID", "Name", Model.ResponsableId), new { @class = "form-control  col-md-8" })
+                </div>
+                @Html.CheckBoxFor(model => model.IncluirResponsableDeshabilitado, new { @onchange = "ChangeIncludeResponsable()" })
+                <label for="chkRespDisabled">Incluir deshabilitados</label>
+            </div>*@
+
+            @*<div class="form-group">
+                                    @Html.LabelForModel("Filter For:", htmlAttributes: new { @class = " col-md-2" })
+                                    <div class="col-md-10 customMargin">
+                                        @Html.DropDownListFor(model => model.type, new List<SelectListItem>
+                                   {new SelectListItem{ Text= "", Value = "" },
+                                           new SelectListItem{ Text= "Check Date", Value = "Check_Date" },
+                                           new SelectListItem{ Text= "Created Date", Value = "Created_Date" },
+                                              new SelectListItem{ Text= "Move To Zeus Date", Value = "Move_to_Zeus_Date" },
+                                   }, htmlAttributes: new { @class = "form-control customSelect" })
+                                        @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+                <a href="~/Views/Reports/productosVendidos.cshtml">~/Views/Reports/productosVendidos.cshtml</a>
+                                    </div>
+                                </div>*@
+
+            <div class="form-group col-md-1">
+                <label class="form-label" for="">&nbsp;</label>
+                <input type="submit" value="Buscar" class="btn btn-secondary" />
+
+            </div>
+        </div>
+
+
+    </div>
+}
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th hidden>
+                Numero Factura
+            </th>
+            <th hidden>
+                Fecha y Hora
+            </th>
+            <th hidden>
+                Forma de pago
+            </th>
+            <th hidden>
+                Neto
+            </th>
+            <th hidden>
+                Tienda
+            </th>
+            <th hidden>
+                Responsable
+            </th>
+            <th>
+                Código
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th> Valor</th>
+            <th>Estado</th>
+            <th> Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Lista != null)
+        {
+            var listaTipada = ViewBag.Lista as IEnumerable<DrugStoreMnngt.Models.FacturaCustom>;
+            foreach (var item in listaTipada)
+            {
+                var subtotal = item.Cantidad * item.Valor;
+                <tr>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.FormaPagoText)
+                    </td>
+                    <td hidden>
+                        @subtotal
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.NombreTienda)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.NombreResponsable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+
+                        @{
+                            var color = "";
+                            var status = "";
+                            if (item.Estado == null)
+                            {
+                                color = "#f0ad4e";
+                                status = "Pendiente";
+                            }
+                            else if (item.Estado.Value)
+                            {
+                                color = "#ac2925";
+                                status = "Devuelto";
+                            }
+                            else
+                            {
+                                color = "#204d74";
+                                status = "Confirmado";
+                            }
+                        }
+                        <label class="badge" style="background-color:@color">@status</label>
+
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.total)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>
+
+
+
+@section scripts
+    {
+    <script src="~/Scripts/linq.js"></script>
+    <script>
+
+        function changedateformat(val) {
+            const myArray = val.split("-");
+
+            let year = myArray[0];
+            let month = myArray[1];
+            let day = myArray[2];
+
+            let formatteddate = day + "-" + month + "-" + year;
+            return formatteddate;
+        }
+
+        $(document).ready(function () {
+          //  $('#tablelist').append('<caption style="caption-side:head;color:black;width=200px;"><div> Reporte de Credito \n Desde: @ViewBag.FI  Hasta: @ViewBag.FF  \n Generado por <strong>@ViewBag.UserName </strong> \n  Fecha Creación: <strong>@DateTime.Now </strong> </div ></caption>');
+
+
+            //var oTable = $('#tablelist').DataTable();
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: true,
+                dom: 'Blfrtip',
+                buttons: [
+                     {
+                        extend: 'excel'
+                        , customize: function (xlsx) {
+
+                            var FormasdePagoList = JSON.parse($("#hdFormaPago").val());
+
+                            console.log(xlsx);
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            var downrows = 0;
+                            var clRow = $('row', sheet);
+                            //update Row
+                            clRow.each(function () {
+                                var attr = $(this).attr('r');
+                                var ind = parseInt(attr);
+                                ind = ind + downrows;
+                                $(this).attr("r", ind);
+                            });
+
+                            // Update  row > c
+                            $('row c ', sheet).each(function () {
+                                var attr = $(this).attr('r');
+                                var pre = attr.substring(0, 1);
+                                var ind = parseInt(attr.substring(1, attr.length));
+                                ind = ind + downrows;
+                                $(this).attr("r", pre + ind);
+                            });
+
+                            function Addrow(index, data) {
+                                msg = '<row r="' + index + '">'
+                                for (i = 0; i < data.length; i++) {
+                                    var key = data[i].k;
+                                    var value = data[i].v;
+                                    msg += '<c t="inlineStr" r="' + key + index + '" s="42">';
+                                    msg += '<is>';
+                                    msg += '<t>' + value + '</t>';
+                                    msg += '</is>';
+                                    msg += '</c>';
+                                }
+                                msg += '</row>';
+                                return msg;
+                            }
+
+                            var  fromDate = changedateformat( $("#fromDate").val());
+                            var toDate = changedateformat($("#toDate").val());
+
+                            var tbl = $('#tablelist');
+                            var map = tbl.DataTable().data().map(function (item) { return { responsable: item[5], formaPago: item[2], neto: parseFloat(item[3]) } }).toArray()
+
+                           var FormaPagoNoDefinida = map.find(f => f.formaPago == ''); //forma de pago no definida
+                            if (FormaPagoNoDefinida != undefined) {
+                                FormasdePagoList.push({ Id: 0, CatalogId: 0, Name: 'No definida', Description: 'No definida', IsActive: true })
+                            }
+                            var resumenResponsables =
+                                Enumerable.From(map).GroupBy(
+                                function (item) { return item.responsable },
+                                    function (responsable) {
+                                        return { formaPago: responsable.formaPago, neto: responsable.neto };
+                                    },
+                                    function (key, grouping) {
+
+                                        FormasdePagoList.forEach(function (ifp) {
+                                            grouping.source.push({ formaPago: ifp.Name, neto: 0 })
+                                        });
+
+                                    return {
+                                        responsable: key,
+                                        neto: Enumerable.From(grouping.source).Sum(function (sum) { return sum.neto }),
+                                        formaPago: Enumerable.From(grouping.source).GroupBy(
+                                            function (g) { return g.formaPago },
+                                            function (g2) { return { neto: g2.neto } },
+                                            function (key2, grouping2) {
+                                                return {
+                                                    formaPago: key2,
+                                                    subtotal: Enumerable.From(grouping2.source).Sum(function (sum2) { return sum2.neto })
+                                                }
+                                            }
+                                        ).ToArray()
+                                    };
+
+                                }
+
+                            ).ToArray();
+
+                            var firsRowResumen = sheet.childNodes[0].childNodes[1].children.length + 4;
+
+                            var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+                            var arrayTitleFormasPago = [];
+                            arrayTitleFormasPago.push({ k: 'A', v: `Responsable` });
+
+                            FormasdePagoList.forEach(function (item, index) {
+                                item.Total = 0;
+                                arrayTitleFormasPago.push({ k: alphabet[index + 1], v: item.Name });
+                            });
+
+                            arrayTitleFormasPago.push({ k: alphabet[arrayTitleFormasPago.length], v: `Total` });
+
+
+                            var r0 = Addrow(firsRowResumen, arrayTitleFormasPago);
+
+
+                            sheet.childNodes[0].childNodes[1].innerHTML = sheet.childNodes[0].childNodes[1].innerHTML + r0;
+
+                            firsRowResumen = firsRowResumen + 1;
+
+                            resumenResponsables.forEach(function (item) {
+                                var arrayFormasPago = [];
+
+                                arrayFormasPago.push({ k: 'A', v: item.responsable });
+                                FormasdePagoList.forEach(function (fpitem, index) {
+                                    var subtotal = item.formaPago.find(f => (f.formaPago == '' ? 'No definida' : f.formaPago) == fpitem.Name).subtotal;
+                                    fpitem.Total = fpitem.Total + subtotal;
+                                    arrayFormasPago.push({ k: alphabet[index + 1], v:subtotal});
+                                });
+
+                                arrayFormasPago.push({ k: alphabet[arrayFormasPago.length], v: item.neto});
+
+                                var r1 = Addrow(firsRowResumen, arrayFormasPago);
+                                sheet.childNodes[0].childNodes[1].innerHTML = sheet.childNodes[0].childNodes[1].innerHTML + r1;
+
+
+                                firsRowResumen = firsRowResumen + 1;
+                            });
+
+                            var arrayFooterFormasPago = [];
+                            var GranTotal = 0;
+                            arrayFooterFormasPago.push({ k: 'A', v: `Totales` });
+                            FormasdePagoList.forEach(function (item, index) {
+                                arrayFooterFormasPago.push({ k: alphabet[index + 1], v: item.Total });
+                                GranTotal = GranTotal + item.Total;
+                            });
+
+                            arrayFooterFormasPago.push({ k: alphabet[arrayFooterFormasPago.length], v: GranTotal });
+                            var r3 = Addrow(firsRowResumen, arrayFooterFormasPago);
+
+                            sheet.childNodes[0].childNodes[1].innerHTML = sheet.childNodes[0].childNodes[1].innerHTML + r3;
+                            //insert
+                            //var r1 = Addrow(firsRowResumen, [{ k: 'A', v: `Reporte de productos vendidos Del ${fromDate} al ${toDate}` }, { k: 'B', v: '' }, { k: 'C', v: '' }]);
+                            //var r2 = Addrow(2, [{ k: 'A', v: '' }, { k: 'B', v: 'ColB' }, { k: 'C', v: '' }]);
+                            //var r3 = Addrow(3, [{ k: 'A', v: '' }, { k: 'B', v: '' }, { k: 'C', v: 'ColC' }]);
+
+                            //sheet.childNodes[0].childNodes[1].innerHTML = sheet.childNodes[0].childNodes[1].innerHTML + r1;
+                        }
+                    }, {
+                        extend: 'print'
+                        },
+                ],
+                rowGroup: {
+                    endRender: null,
+                    startRender: function (rows, group) {
+                        //var Neto = rows
+                        //    .data()
+                        //    .pluck(4)
+                        //    .map(function (item) { return parseFloat(item); }).reduce(function (a, b) {
+                        //        return a + b;
+                        //    });
+
+                        var fecha = rows
+                            .data()
+                            .pluck(1)[0];
+
+                        var Neto = rows
+                            .data()
+                            .pluck(2)[0];
+
+                        var tienda = rows
+                            .data()
+                            .pluck(4)[0];
+
+                        var responsable = rows
+                            .data()
+                            .pluck(5)[0];
+
+                        return $('<tr/>')
+                            .append(`<td colspan="5">Factura ${group} - ${fecha} (Tienda: ${tienda} - Resposable: ${responsable})</td>`)
+                            .append('<td>' + Neto + '</td>')
+                    },
+                    dataSrc: 0
+                }
+
+            });
+
+            $("#ClientID").chosen();
+        });
+
+        function ChangeIncludeResponsable() {
+
+            var select = $("[name='ResponsableId']");
+
+            var chk = $("[name='IncluirResponsableDeshabilitado']");
+            var chkValue = chk.prop("checked");
+
+            var JsonData = $("#hdResp").val();
+            JsonData = JSON.parse(JsonData);
+            if (chkValue == false) {
+                JsonData = JsonData.filter(f => f != null && f.Activo == true);
+            } else {
+                JsonData = JsonData.filter(f => f != null);
+            }
+
+            select.html('');
+            select.append('<option value=""></option>');
+            JsonData.forEach(function (item) {
+                select.append('<option value="' + item.ID + '">' + item.Name + '</option>');
+            });
+
+        }
+
+    </script>
+    @*<style>
+            .group-start {
+                background-color: #d5d1d1 !important;
+                font-weight: bold;
+            }
+        </style>*@
+
+}

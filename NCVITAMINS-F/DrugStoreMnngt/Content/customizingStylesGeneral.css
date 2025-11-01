@@ -1,0 +1,73 @@
+﻿hr {
+    border-color: red;
+}
+
+.nessColor {
+    
+    font-style: italic;
+    
+    font-size: 1.7em;
+}
+
+.navbar-inverse {
+
+    border-color: #080808;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+    }
+
+dropdown-menu > li > a:hover, .dropdown-menu > li > a:hover {    
+    background-color:skyblue!important;
+}
+
+.caret {
+    color: red;    
+    
+    display: inline-block;
+    /* width: 0; */
+    /* height: 0; */
+    margin-left: 5px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid ;
+    /* border-right: 4px solid transparent; */
+    /* border-left: 4px solid transparent; */
+    /*color: red;
+    width: 1.5px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid \9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;*/
+}
+
+body {
+    /*background-color:#dfdfdf36!important;*/
+    background-color: #ddd !important;
+}
+
+.footer2 {
+    position: fixed;
+    background-color: #dfdfdf36 !important;
+    /*left: 0px;*/
+    bottom: 0px;
+    z-index: 1;
+    width: 100%;
+}
+
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid rgb(255 255 255 / 90%);
+}
+
+.table > thead:first-child > tr:first-child > th{
+border-top: 1px solid rgb(255 255 255 / 90%)!important;
+}
+
+
+/*Esto pertenece al Menu*/

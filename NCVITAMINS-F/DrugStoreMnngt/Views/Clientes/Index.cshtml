@@ -1,0 +1,106 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.Cliente>
+
+@{
+    ViewBag.Title = "Responsables";
+}
+
+<br>
+<p>
+    <a href="@Url.Action("Create","Clientes")" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-play-circle"></span> Agregar Cliente</a>
+    <a href="@Url.Action("Invoice","Facturas")" class="btn btn-info btn-xs"> Facturar <span class="glyphicon glyphicon-pencil"></span></a>
+</p>
+<table id="tblCliente" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tienda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                Fecha Nacimiento
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellidos)
+                </td>
+                <td>
+                    @{var nombreTienda = item.Tienda == null ? "" : ViewBag.Tienda[item.Tienda.Value];}
+                    @nombreTienda
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @if (item.FechaNacimiento.HasValue)
+                    {
+                        var fecha = item.FechaNacimiento.Value.ToShortDateString();
+                        @Html.DisplayFor(modelItem => fecha);
+                    }
+                    else
+                    {
+
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Activo)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID },new {@class= "btn btn-sm btn-info" })  
+                    @if (SecurityShell.Models.InformationIdentity.TypeID() == 1)
+                    {
+                       @Html.ActionLink("Borrar", "Delete", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                    }
+                    @Html.ActionLink("Compras Realizadas", "ComprasCliente", new { id = item.ID },new {@class= "btn btn-sm btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblCliente').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

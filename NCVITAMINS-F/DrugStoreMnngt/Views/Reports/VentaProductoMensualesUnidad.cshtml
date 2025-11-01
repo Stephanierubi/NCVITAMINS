@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.vw_VentaProductoUnidadPorMes>
+
+@{
+    ViewBag.Title = "VentaProductoMensualesUnidad";
+}
+
+<h2>VentaProductoMensualesUnidad</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="tblComprasCliente" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FECHAFACTURA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionEspecifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionGeneral)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VENTAS)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHAFACTURA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionEspecifica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionGeneral)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VENTAS)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EDMXID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EDMXID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EDMXID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblComprasCliente').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

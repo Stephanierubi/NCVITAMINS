@@ -1,0 +1,78 @@
+﻿
+
+
+.td {
+    text-align: center;
+}
+ select {
+    max-width: 75px;
+}
+.customTexbox {
+    color:blue;
+    max-width: 65px;
+}
+.customMargin {
+    margin-bottom: 10px;
+}
+table.dataTable thead th, table.dataTable thead td {
+    font-size: 12px;
+    font-family: Arial;
+}
+table.dataTable.row-border tbody th{
+    font-size: 12px;
+    font-family: Arial;
+}
+
+.customSelect {
+    max-width: 280px !important;
+}
+.dataTables_scroll {
+    position: relative
+}
+
+.dataTables_scrollHead {
+    margin-bottom: 40px;
+}
+
+.dataTables_scrollFoot {
+    position: absolute;
+    top: 38px
+}
+
+table.dataTable.compact thead th, table.dataTable.compact thead td {
+    color: black;
+    background: #F2AA4CFF;
+}
+table.dataTable.compact thead th, table.dataTable.compact2 thead td {
+    color: black;
+    background: white;
+}
+table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: white;
+    color: #020044;
+}
+
+table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+    background-color: #f3f3f3;
+    color: #020044;
+}
+table.dataTable.display tbody tr.even {
+    background-color: white;
+    color: #020044;
+}
+
+table.dataTable.display tbody tr.odd {
+    background-color: #f3f3f3;
+    color: #020044;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+padding:0px;
+}
+.dt-buttons {
+    float: none !important;
+}
+
+.chosen-container {
+    width: 250px!important;
+}

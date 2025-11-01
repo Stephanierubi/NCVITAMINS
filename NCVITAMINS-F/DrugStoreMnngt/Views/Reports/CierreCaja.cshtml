@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.CIERRECAJAGENERAR_Result>
+@{
+    ViewBag.Title = "Cierre Caja <br> Cajero: "+  @ViewBag.ResponsableNombre + " <br> Fecha: " + @ViewBag.FechaConsulta;
+}
+
+<h2>Cierre Caja</h2>
+<link href="~/Content/ReportDataTableCustom.css" rel="stylesheet" />
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">  
+    <thead>
+        <tr>
+            <th>
+                No
+            </th>
+            <th>
+                Hora
+            </th>
+            <th>
+                Producto
+            </th>
+            <th>
+                Forma Pago
+            </th>
+            <th>
+                Qty
+            </th>
+            <th>
+                Neto
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ROW_NUMBERCount)
+                    </td>
+                    <td>
+                        @if (item.Fecha.HasValue)
+                        {
+                            var hora = item.Fecha.Value.ToString("HH:mm");
+                            @Html.DisplayFor(modelItem => hora)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Creador)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Neto)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+
+                                ;
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-weight', 'bold');
+                        }
+                    }
+                ]
+            });
+
+        });
+
+    </script>
+
+}

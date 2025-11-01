@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.ProductoCustom>
+
+@{
+    ViewBag.Title = "Stock Minimo";
+}
+<br>
+<h4>Lista de productos con Stock Minimo</h4>
+<link href="~/Content/ReportDataTableCustom.css" rel="stylesheet" />
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Código
+            </th>
+            <th>
+                Descripcion Especifica
+            </th>
+            <th>
+                Marca
+            </th>
+            <th>
+                Vencimiento
+            </th>
+            <th>
+                Precio Compra
+            </th>
+            <th>
+                Cod. Barra
+            </th>
+            <th>
+                Cant. Disponible
+            </th>
+            <th>
+                Cant. Minima
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionEspecifica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+
+                <td>
+                    @{string fec = string.Empty;
+                        if (item.FechaVencimiento.HasValue)
+                        {
+                            fec = item.FechaVencimiento.Value.ToString("dd/MM/yy");
+                        }
+                    }
+                    @Html.DisplayFor(modelItem => fec)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoBarra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadDisponible)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockMinimo)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'csv', 'excel'
+                ]
+
+            });
+
+        });
+
+    </script>
+
+}

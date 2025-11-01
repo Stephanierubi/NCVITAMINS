@@ -1,0 +1,91 @@
+﻿@model DrugStoreMnngt.Models.FacturaDetalleCustom
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Detalles Factura</h2>
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="form-horizontal">
+        <h4>Detalle</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CodigoBarra, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CodigoBarra, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CodigoBarra, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelForModel("Tienda", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Tienda, @ViewBag.Tienda as SelectList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Tienda, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>Total Factua: <h1>@ViewBag.Total</h1></div>
+<table class="table">
+    <tr>
+        <th>
+            Marca
+        </th>
+        <th>
+            Valor
+        </th>
+        <th>
+            Cantidad
+        </th>
+
+
+    </tr>
+
+    @if (ViewBag.FacturaDetalleInf != null)
+    {
+        var listaTipada = ViewBag.FacturaDetalleInf as IEnumerable<DrugStoreMnngt.Models.FacturaDetalleCustom>;
+        foreach (var item in listaTipada)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Pagar", "Pagar")
+</div>
+<br>
+<a href="Index" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>

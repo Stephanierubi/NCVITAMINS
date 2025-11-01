@@ -1,0 +1,186 @@
+﻿@model DrugStoreMnngt.Models.BD.Producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionEspecifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescripcionEspecifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionGeneral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescripcionGeneral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVencimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPrecentacionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPrecentacionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoBarra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoBarra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadDisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadDisponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadPrecentacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadPrecentacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoVentaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoVentaID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Almacen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Almacen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laboratorio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laboratorio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IVA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IVA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockMinimo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockMinimo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

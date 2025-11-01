@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.Proveedor>
+@using SecurityShell.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>*@
+<br>
+@{
+    if (InformationIdentity.TypeID() == 1)
+    {
+        <p>
+            @Html.ActionLink("Crear nuevo proveedor", "Create")
+        </p>
+    }
+}
+<table id="tblProveedores" class="table  display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+
+                <td>
+                    @{ if (InformationIdentity.TypeID() == 1)
+                        {
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
+                            
+                            @Html.ActionLink("Borrar", "Delete", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblProveedores').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

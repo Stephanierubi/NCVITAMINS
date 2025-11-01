@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.SUCURSAL>
+
+@{
+    ViewBag.Title = "Sucursales Compania";
+}
+
+<h2>sucursalesCompania</h2>
+
+<p>
+    @Html.ActionLink("Crear sucursal", "crearSucursal")
+</p>
+<table id="tblCliente" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.COMPANIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DESCRIPCION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDENTIFICACION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DIRECCION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TELEFONO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.COMPANIA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCRIPCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDENTIFICACION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIRECCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TELEFONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Activo)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "editarSucursal", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Tiendas Sucursal", "configuracionSucursal", new { sucursal = item.ID }, new {@class="btn btn-default"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblCliente').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

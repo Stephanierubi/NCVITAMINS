@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.BD.CatalogDetail>
+
+@{
+    ViewBag.Title = "Tienda";
+}
+
+@*<h4>Tiendas</h4>*@
+
+<p>
+    @Html.ActionLink("Crear tienda", "Create", new { Tipo = "Tienda" })
+</p>
+<table id="tblTienda" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Descripcion
+        </th>
+        <th></th>
+    </tr>
+</thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id, Tipo = "Tienda" }, new { @class = "btn btn-sm btn-info" }) 
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id, Tipo = "Tienda" }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+        </tr>
+    }
+        </tbody>
+</table>
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tblTienda').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+
+                ]
+
+            });
+        });
+
+    </script>
+
+}

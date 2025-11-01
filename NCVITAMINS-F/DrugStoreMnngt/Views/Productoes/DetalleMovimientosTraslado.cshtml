@@ -1,0 +1,128 @@
+﻿@model IEnumerable<DrugStoreMnngt.Models.TransladoDetalle>
+@using SecurityShell.Models;
+@{
+    ViewBag.Title = "Compras";
+}
+
+<h2>@*Lista de compras de productos*@</h2>
+@{
+    if (InformationIdentity.TypeID() == 1)
+    {
+        <p>
+
+            @if (!ViewBag.ConciliacionAbierta)
+            {
+                <a href="@Url.Action("TrasladoProducto","Productoes")" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span> Nueva traslado de productos</a>
+            }
+            else
+            {
+                <a class="btn btn-primary btn-xs" onclick="toastr.warning('Conciliación pendiente de procesar');"><span class="glyphicon glyphicon-plus"></span> Nueva traslado de productos</a>
+            }
+        </p>
+    }
+}
+<div class="form-group">
+    @{
+        var fecha = (DateTime)(ViewBag.FilterDate);
+    }
+    <div class="col-md-10" style="margin-bottom:10px;">
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => fecha, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker  input-sm " })
+        </div>
+        <div class="col-md-2">
+            <a href="#" onclick="window.location.replace(`DetalleMovimientosTraslado?FilterDate=${$('#fecha').val()}`);" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span> Buscar</a>
+        </div>
+    </div>
+</div>
+
+<table id="tablelist" class=" table-striped display compact dt-body-center dt-head-center">
+    <thead>
+        <tr>
+            <th>
+                Fecha
+            </th>
+            <th>
+                De
+            </th>
+            <th>
+                Hacia
+            </th>
+            <th>
+                Producto
+            </th>
+            <th style="text-align:right">
+                Cantidad
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th>
+                Comentario
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{string fec = fec = item.Fecha.ToString("dd/MM/yyyy"); }
+
+                    @Html.DisplayFor(modelItem => fec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlmacenOrigenNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlmacenDestinoNombre)
+                </td>
+
+                <td>
+                    @{var nombre = item.CodigoProducto + " " + item.ProductoNombre;}
+                    @Html.DisplayFor(modelItem => @nombre)
+                </td>
+                <td style="text-align:right">
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoMov)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comentario)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: false,
+                dom: 'Blfrtip',
+                buttons: [
+                     'excel'
+
+                ]
+
+            });
+            console.log("Info usuario id " + @InformationIdentity.TypeID());
+            function getButtonsString() {
+                var info;
+                if (@InformationIdentity.TypeID() !== 2) {
+                    info = "'copy', 'excel', 'pdf'";
+                }
+                return info;
+            }
+
+
+
+        });
+
+    </script>
+
+}

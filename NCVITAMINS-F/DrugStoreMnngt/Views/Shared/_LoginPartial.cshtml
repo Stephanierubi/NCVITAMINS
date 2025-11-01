@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+
+
+        <ul class="nav navbar-nav navbar-right navbar-top-links">
+            @*<li>
+                    @Html.ActionLink("Bienvenido " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><button type="submit" href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-green"><span class="glyphicon glyphicon-lock"></span> Cerrar sesión</button></li>*@
+
+            <li class="dropdown">
+                <a style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" data-toggle="dropdown" href="#" title="@User.Identity.Name">
+                    <i class="glyphicon glyphicon-user fa-fw" style="font-size:medium"></i>&nbsp;@User.Identity.Name<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-user in">
+                    @*  <li>
+                            <a class="active ItemDropDown">
+                                <span class="fa fa-user-circle">
+                                </span>&nbsp;Perfil
+                            </a>
+                        </li>*@
+                    <li>
+                        <a id="perfil" href="#" onclick="location.href='@Url.Action("Perfil","Account",null)'" class="active ItemDropDown">
+                            <span class="fa fa-user-circle"> </span>
+                            &nbsp;Perfil
+                        </a>
+                    </li>
+                    @*<li>
+                            <a class="active ItemDropDown">
+                                <span class="fa fa-tag">
+                                </span>&nbsp;Acerca de...
+                            </a>
+                        </li>*@
+                    <li class="divider"></li>
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="active ItemDropDown">
+                            <span class="fa fa-sign-out"></span>&nbsp;Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right navbar-top-links pull-right">
+        <!--<li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>-->
+        <li>
+
+            <a id="loginLink" href="#" onclick="location.href='@Url.Action("Login","Account",null)'" class="active">
+                <span class="fa fa-sign-in"> </span>
+                &nbsp;Iniciar sesión
+            </a>
+
+        </li>
+    </ul>
+}

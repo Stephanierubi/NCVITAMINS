@@ -1,0 +1,141 @@
+﻿@model CCustomization.CustomClasses.FilterReport
+
+@{
+    ViewBag.Title = "Consutar productos existentes";
+}
+
+
+
+@using (Html.BeginForm("HistoricoTransaccionesProducto", "Productoes", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.producto)
+    <div id="FilterDiv" class="col-md-12" style="padding:10px;border:1px solid #e1d9d9;padding-bottom: 0px;border-radius: 4px;margin-bottom:8px">
+        <div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelForModel("Desde:", htmlAttributes: new { @class = " col-md-2" })
+                <div class="col-md-10 customMargin">
+                    @Html.TextBoxFor(model => model.fromDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control datepicker", @required = "required" })
+
+                </div>
+            </div>
+
+
+            @*<div class="form-group col-md-4">
+                    @Html.LabelForModel("Complemento:", htmlAttributes: new { @style = "margin-top: 4px;", @class = "col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.filterStringS, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.filterStringT, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+        </div>
+        <div class="form-group ">
+
+            <button type="submit" class="btn btn-default btn-sm">
+                <i class="glyphicon glyphicon-search"></i> Buscar
+            </button>
+
+        </div>
+
+
+    </div>
+}
+<div>
+    <table id="tablelist" class="table-striped display compact dt-body-center dt-head-center">
+        <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Desde
+                </th>
+                <th>
+                   Para
+                </th>
+                <th>
+                    Comentario
+                </th>
+                <th>
+                    Usuario
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Existencia
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.ListaDetalle != null)
+            {
+                float neto = 0;
+                var listaTipada = ViewBag.ListaDetalle as IEnumerable<DrugStoreMnngt.Models.ProductHistory>;
+                foreach (var item in listaTipada)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Desde)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Para)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comentario)
+                        </td>
+                        <td>                           
+                            @Html.DisplayFor(modelItem => item.Creado)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @{
+                                neto += item.Cantidad??0;
+                            }
+                            @Html.DisplayFor(modelItem => neto)
+                        </td>
+                     
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts
+    {
+    <script>
+
+        function ClearText() {
+
+            $("#FilterDiv input").each(function (index, item) { $(item).val(null); });
+
+        }
+
+        $(document).ready(function () {
+            $('#tablelist').append('<caption style="caption-side:head;color:black;width=200px;"><div> Reporte de historico para el producto @ViewBag.ProductoInfo.DescripcionEspecifica </div ></caption>');
+            var oTable = $('#tablelist').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                fixedHeader: true,
+                ordering: false,
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+                ]
+
+            });
+
+        });
+
+    </script>
+
+}
